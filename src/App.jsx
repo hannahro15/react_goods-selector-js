@@ -49,7 +49,7 @@ export const App = () => {
               >
                 <td>
                   <button
-                    data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
+                    data-cy={isSelected ? 'AddButton' : 'RemoveButton'}
                     type="button"
                     className={`button ${isSelected ? 'is-info' : ''}`}
                     onClick={() => {
