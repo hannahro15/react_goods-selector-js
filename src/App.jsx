@@ -19,52 +19,59 @@ export const App = () => {
   const [selectedGoods, setSelectedGoods] = useState(['Jam']);
 
   return (
-  <main className="section container">
-    {selectedGoods.length === 0 ? (
-    <h1 className="title is-flex is-align-items-center">No goods selected</h1>
-    ) : (
-    <h1 className="title is-flex is-align-items-center">
-      {selectedGoods.join(', ')} is selected
-      <button data-cy="ClearButton" type="button" className="delete ml-3" onClick={() => setSelectedGoods([])}/>
-    </h1>
-    )}
+    <main className="section container">
+      {selectedGoods.length === 0 ? (
+        <h1 className="title is-flex is-align-items-center">
+          No goods selected
+        </h1>
+      ) : (
+        <h1 className="title is-flex is-align-items-center">
+          {selectedGoods.join(', ')} is selected
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => setSelectedGoods([''])}
+          />
+        </h1>
+      )}
 
-   <table className="table">
-      <tbody>
-        {goods.map((good) => {
-          const isSelected = selectedGoods.includes(good);
+      <table className="table">
+        <tbody>
+          {goods.map(good => {
+            const isSelected = selectedGoods.includes(good);
 
-          return (
-            <tr
-              key={good}
-              data-cy="Good"
-              className={isSelected ? 'has-background-success-light' : ''}
-            >
-              <td>
-                <button
-                  data-cy={isSelected ? "RemoveButton" : "AddButton"}
-                  type="button"
-                  className={`button ${isSelected ? 'is-info' : ''}`}
-                  onClick={() => {
-                    if (isSelected) {
-                      setSelectedGoods(selectedGoods.filter(g => g !== good));
-                    } else {
-                      setSelectedGoods([...selectedGoods, good].sort());
-                    }
-                  }}
-                >
-                  {isSelected ? '-' : '+'}
-                </button>
-              </td>
+            return (
+              <tr
+                key={good}
+                data-cy="Good"
+                className={isSelected ? 'has-background-success-light' : ''}
+              >
+                <td>
+                  <button
+                    data-cy={isSelected ? 'RemoveButton' : 'AddButton'}
+                    type="button"
+                    className={`button ${isSelected ? 'is-info' : ''}`}
+                    onClick={() => {
+                      if (isSelected) {
+                        setSelectedGoods(selectedGoods.filter(g => g !== good));
+                      } else {
+                        setSelectedGoods([...selectedGoods, good].sort());
+                      }
+                    }}
+                  >
+                    {isSelected ? '-' : '+'}
+                  </button>
+                </td>
 
-              <td data-cy="GoodTitle" className="is-vcentered">
-                {good}
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  </main>
+                <td data-cy="GoodTitle" className="is-vcentered">
+                  {good}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </main>
   );
 };
